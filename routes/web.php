@@ -16,3 +16,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+//Route::get('/publications', 'PublicationsController@index')->name('publications');
+Route::middleware(['auth'])
+->group(function(){
+
+    Route::resource('publications', 'PublicationsController');
+    Route::resource('comments', 'CommentsController');
+});
+
