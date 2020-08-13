@@ -64,7 +64,7 @@ class PublicationsController extends Controller
                 $q->where('user_id', auth()->user()->id);
             })->first();
 
-        return view('publications.show', compact('publication', 'comments', 'ya_tiene_comentario'));
+        return view('publications.show', compact('publication', 'ya_tiene_comentario'));
     }
 
     /**
