@@ -83,7 +83,7 @@
     </div>
     @endforelse
     @if(!$ya_tiene_comentario)
-    <button type="button" class="btn btn-primary float-right mt-5" data-toggle="modal" data-target="#exampleModal">
+    <button type="button" class="btn btn-primary float-left mt-5" data-toggle="modal" data-target="#exampleModal">
         Agregar nuevo comentario
     </button>
     @endif
