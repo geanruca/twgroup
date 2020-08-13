@@ -91,7 +91,9 @@ class CommentsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $comment = Comment::where('id',$id)->first();
+
+        return view('publications.edit_comment', compact('comment'));
     }
 
     /**
@@ -101,9 +103,13 @@ class CommentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $r, $id)
     {
-        //
+        Comment::find($id)->update([
+            'title'   => $r->title,
+            'content' => $r->content
+        ]);
+        return redirect()->route('publications.index')->with('listo','Comentario editado');
     }
 
     /**
@@ -114,6 +120,7 @@ class CommentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Comment::where('id',$id)->delete();
+        return redirect()->route('publications.index')->with('listo', 'Comentario eliminado');
     }
 }

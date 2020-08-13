@@ -19,7 +19,7 @@ class CreateCommentsTable extends Migration
             $table->longtext('content');
             $table->string('status');
             $table->unsignedBigInteger('publication_id');
-            $table->foreign('publication_id')->references('id')->on('publications');
+            $table->foreign('publication_id')->references('id')->on('publications')->onDelete('cascade');
             
         });
     }

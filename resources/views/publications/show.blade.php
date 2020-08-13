@@ -38,26 +38,43 @@
 
     <div class="row mt-5">
         <div class="col-2 ">
-            <b>Titulo</b>
+            <b>Escrito por</b>
         </div>
-        <div class="col-8 ">
+        <div class="col-6 ">
             <b>Contenido</b>
         </div>
         <div class="col-2 ">
             <b>Última actualización</b>
+        </div>
+        <div class="col-2 ">
+            <b>Actions</b>
         </div>
     </div>
 
     @forelse ($publication->comments as $c)
         <div class="row"> 
             <div class="col-2 ">
-            <span> <a href="/comments/{{$c->id}}">{{$c->title}}</a></span>
+                <span> {{Auth::user($c->user_id)->name}}</span>
             </div>
-            <div class="col-8 ">
+            <div class="col-6 ">
                 <span>{{$c->content}}</span>
             </div>
             <div class="col-2 ">
                 <span>{{$c->updated_at->diffForHumans()}}</span>
+            </div>
+            <div class="col-2 ">
+                @if($c->user_id == auth()->user()->id)
+                    <a class="btn btn-info text-white" href="{{route('comments.edit', $c->id)}}">
+                        Editar
+                    </a>
+                    <form action="{{route('comments.destroy',$c->id)}}" method="POST">
+                    <button type="submit" class="btn btn-danger">
+                        @method('DELETE')
+                        @csrf
+                        Eliminar
+                    </button>
+                    </form>
+                @endif
             </div>
         </div>
     @empty

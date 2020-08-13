@@ -75,7 +75,10 @@ class PublicationsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $publication = Publication::where('id',$id)->with('comments', 'user')->first();
+
+        return view('publications.edit', compact('publication'));
+        
     }
 
     /**
@@ -85,9 +88,13 @@ class PublicationsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $r, $id)
     {
-        //
+        Publication::find($id)->update([
+            'title'=>$r->title,
+            'content'=>$r->content
+        ]);
+        return redirect()->route('publications.index')->with('listo','Publicación creada');
     }
 
     /**
@@ -98,6 +105,8 @@ class PublicationsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Publication::where('id',$id)->delete();
+
+        return redirect()->route('publications.index')->with('listo', 'Publicación eliminada');
     }
 }

@@ -19,8 +19,6 @@
 
                 <div class="card-body">
                     <!-- Button trigger modal -->
-                        
-                        
                         <div class="row mt-5">
                             <div class="col-2 ">
                                 <b>Titulo</b>
@@ -37,17 +35,28 @@
                                     <div class="col-2 ">
                                     <span> <a href="publications/{{$p->id}}">{{$p->title}}</a></span>
                                     </div>
-                                    <div class="col-8 ">
+                                    <div class="col-6 ">
                                         <span>{{$p->content}}</span>
                                     </div>
                                     <div class="col-2 ">
                                         <span>{{$p->updated_at->diffForHumans()}}</span>
                                     </div>
+                                    <div class="col-2 ">
+                                        @if($p->user_id == auth()->user()->id)
+                                            <a class="btn btn-info text-white" href="{{route('publications.edit', $p->id)}}">
+                                                Editar
+                                            </a>
+                                            <form action="{{route('publications.destroy',$p->id)}}" method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button type="submit"  class="btn btn-danger">
+                                                    Eliminar
+                                                </button>
+                                            </form>
+                                        @endif
+                                    </div>
                                 </div>
                             @empty
-                            <div class="row justify-content-center mt-5">
-                                <p>No hay publicaciones aún</p>
-                            </div>
                             @endforelse       
                 </div>
             </div>
@@ -89,4 +98,5 @@
     </div>
     </div>
 </div>
+
 @endsection
