@@ -45,7 +45,7 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 36px;
             }
 
             .links > a {
@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    CRUD Example
+                    Ejemplo sencillo de desarrollo de un CRUD (Create, read, update, delete)
                 </div>
 
                 
